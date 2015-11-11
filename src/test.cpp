@@ -6,8 +6,13 @@
 #include <planning/Path.hpp>
 #include <Geometry2d/ShapeSet.hpp>
 #include <iostream>
-
+#include "MotionControl.hpp"
+#include <time.h>
+#include <sys/time.h>
 using namespace std;
+using namespace Geometry2d;
+
+// extern const Field_Dimensions::Current_Dimensions;
 int main(int argc, char const *argv[])
 {
   using namespace Planning;
@@ -26,6 +31,20 @@ int main(int argc, char const *argv[])
     if (mi) {
       cout << t << ", " << mi->pos << ", " << mi->vel << endl;
     }
+  }
+  // create rotation command and motion command
+  std::unique_ptr<RotationCommand> rc = std::make_unique<RotationCommand>(FacePointCommand({1,1}));
+  // std::unique_ptr<MotionCommand> mc = std::make_unique<MotionCommand>(PathTargetCommand(MotionInstant())); // goal here doesnt matter, fucked up
+  Point pos(0,0);
+  float angle = 0;
+  MotionConstraints motionConstraints;
+  RotationConstraints rotationConstraints;
+  std::unique_ptr<MotionControl> control(new MotionControl());
+  for (int i = 0;; ++i)
+  {
+    MotionWrapper w = control->run(path.get(), rc.get(), mc.get(), pos, angle, motionConstraints, rotationConstraints);
+    cout << "vel = " << w.vel << ", omega = " << w.w << endl;
+    usleep(16000);
   }
   printf("hello world!\n");
   return 0;

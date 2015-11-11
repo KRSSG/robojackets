@@ -44,9 +44,9 @@ MotionControl::MotionControl() : _angleController(0, 0, 0, 50) {
     _lastCmdTime = -1;
 }
 
-MotionWrapper MotionControl::run(std::unique_ptr<Planning::Path> path,
-                                   std::unique_ptr<Planning::RotationCommand> rotationCommand,
-                                   std::unique_ptr<Planning::MotionCommand> motionCommand,
+MotionWrapper MotionControl::run(  Planning::Path* path,
+                                   Planning::RotationCommand* rotationCommand,
+                                   Planning::MotionCommand *motionCommand,
                                    Geometry2d::Point pos,
                                    float angle,
                                    const MotionConstraints &motionConstraints,
@@ -75,14 +75,14 @@ MotionWrapper MotionControl::run(std::unique_ptr<Planning::Path> path,
 
     boost::optional<Geometry2d::Point> targetPt;
     if (motionCommand->getCommandType() == MotionCommand::Pivot) {
-        PivotCommand command = *static_cast<PivotCommand*>(motionCommand.get());
+        PivotCommand command = *static_cast<PivotCommand*>(motionCommand);
         targetPt = command.pivotTarget;
     }
 
     switch (rotationCommand->getCommandType()) {
         case RotationCommand::FacePoint:
             targetPt = static_cast<const Planning::FacePointCommand*>(
-                           rotationCommand.get())
+                           rotationCommand)
                            ->targetPos;
             break;
         case RotationCommand::None:

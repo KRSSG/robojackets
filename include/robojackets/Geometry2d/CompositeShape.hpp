@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Geometry2d/Point.hpp"
-#include "Geometry2d/Shape.hpp"
-#include "Geometry2d/Segment.hpp"
+#include "robojackets/Geometry2d/Point.hpp"
+#include "robojackets/Geometry2d/Shape.hpp"
+#include "robojackets/Geometry2d/Segment.hpp"
 #include <vector>
 #include <memory>
 #include <set>

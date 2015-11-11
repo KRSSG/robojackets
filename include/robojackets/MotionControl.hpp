@@ -1,14 +1,14 @@
 #pragma once
 
-#include <Configuration.hpp>
-#include <Geometry2d/Point.hpp>
-#include <Pid.hpp>
-#include <Geometry2d/Point.hpp>
-#include <planning/SingleRobotPathPlanner.hpp>
-#include <planning/RotationCommand.hpp>
-#include <planning/MotionCommand.hpp>
-#include <planning/MotionConstraints.hpp>
-#include <planning/RotationConstraints.hpp>
+#include <robojackets/Configuration.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/Pid.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/planning/SingleRobotPathPlanner.hpp>
+#include <robojackets/planning/RotationCommand.hpp>
+#include <robojackets/planning/MotionCommand.hpp>
+#include <robojackets/planning/MotionConstraints.hpp>
+#include <robojackets/planning/RotationConstraints.hpp>
 class OurRobot;
 
 /**
@@ -37,13 +37,13 @@ public:
      * This runs PID control on the position and angle of the robot and
      * sets values in the robot's radioTx packet.
      */
-    MotionWrapper run(std::unique_ptr<Planning::Path> path,
-                                       std::unique_ptr<Planning::RotationCommand> rotationCommand,
-                                       std::unique_ptr<Planning::MotionCommand> motionCommand,
-                                       Geometry2d::Point pos,
-                                       float angle,
-                                       const MotionConstraints &motionConstraints,
-                                       const RotationConstraints &rotationConstraints);
+    MotionWrapper run(Planning::Path* path,
+                       Planning::RotationCommand* rotationCommand,
+                       Planning::MotionCommand *motionCommand,
+                       Geometry2d::Point pos,
+                       float angle,
+                       const MotionConstraints &motionConstraints,
+                       const RotationConstraints &rotationConstraints);
 
     static void createConfiguration(Configuration* cfg);
 

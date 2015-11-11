@@ -1,5 +1,5 @@
 
-#include "planning/MotionConstraints.hpp"
+#include "robojackets/planning/MotionConstraints.hpp"
 
 REGISTER_CONFIGURABLE(MotionConstraints);
 

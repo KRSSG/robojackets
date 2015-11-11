@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Geometry2d/Point.hpp>
-#include <Geometry2d/ShapeSet.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/Geometry2d/ShapeSet.hpp>
 // #include <SystemState.hpp>
-#include "planning/MotionInstant.hpp"
-#include "Utils.hpp"
+#include "robojackets/planning/MotionInstant.hpp"
+#include "robojackets/Utils.hpp"
 #include <boost/optional.hpp>
 #include <QColor>
 #include <QString>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Geometry2d/Shape.hpp"
-#include "Geometry2d/Point.hpp"
+#include "robojackets/Geometry2d/Shape.hpp"
+#include "robojackets/Geometry2d/Point.hpp"
 
 namespace Geometry2d {
 class Segment;

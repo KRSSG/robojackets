@@ -1,10 +1,10 @@
 #pragma once
 
-#include <planning/Path.hpp>
-#include <Geometry2d/Point.hpp>
-#include <Geometry2d/Segment.hpp>
-#include <Geometry2d/ShapeSet.hpp>
-#include <Configuration.hpp>
+#include <robojackets/planning/Path.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/Geometry2d/Segment.hpp>
+#include <robojackets/Geometry2d/ShapeSet.hpp>
+#include <robojackets/Configuration.hpp>
 
 namespace Planning {
 

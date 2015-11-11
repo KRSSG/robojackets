@@ -2,8 +2,8 @@
 
 #include <list>
 
-#include <Geometry2d/Segment.hpp>
-#include <planning/InterpolatedPath.hpp>
+#include <robojackets/Geometry2d/Segment.hpp>
+#include <robojackets/planning/InterpolatedPath.hpp>
 
 namespace Planning {
 /** base tree class for rrt trees

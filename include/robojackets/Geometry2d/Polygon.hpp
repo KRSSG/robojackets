@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "Geometry2d/Shape.hpp"
-#include "Geometry2d/Rect.hpp"
-#include "Geometry2d/Segment.hpp"
+#include "robojackets/Geometry2d/Shape.hpp"
+#include "robojackets/Geometry2d/Rect.hpp"
+#include "robojackets/Geometry2d/Segment.hpp"
 
 namespace Geometry2d {
 

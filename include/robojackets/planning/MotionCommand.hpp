@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Geometry2d/Point.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
 #include <boost/optional.hpp>
-#include "planning/MotionInstant.hpp"
-#include "Utils.hpp"
+#include "robojackets/planning/MotionInstant.hpp"
+#include "robojackets/Utils.hpp"
 
 namespace Planning {
 

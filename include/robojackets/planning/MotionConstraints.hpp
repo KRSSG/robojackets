@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Configuration.hpp>
-#include <Geometry2d/Point.hpp>
-#include <Configuration.hpp>
+#include <robojackets/Configuration.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/Configuration.hpp>
 #include <boost/optional.hpp>
 
 /**

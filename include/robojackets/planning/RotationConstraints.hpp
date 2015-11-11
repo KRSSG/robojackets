@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Configuration.hpp>
+#include <robojackets/Configuration.hpp>
 
 struct RotationConstraints {
 public:

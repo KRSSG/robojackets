@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Configuration.hpp>
-#include <planning/MotionConstraints.hpp>
-#include <planning/MotionCommand.hpp>
-#include <planning/MotionInstant.hpp>
-#include <planning/Path.hpp>
+#include <robojackets/Configuration.hpp>
+#include <robojackets/planning/MotionConstraints.hpp>
+#include <robojackets/planning/MotionCommand.hpp>
+#include <robojackets/planning/MotionInstant.hpp>
+#include <robojackets/planning/Path.hpp>
 
 namespace Planning {
 

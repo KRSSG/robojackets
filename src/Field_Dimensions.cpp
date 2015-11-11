@@ -9,4 +9,4 @@ const Field_Dimensions Field_Dimensions::Double_Field_Dimensions(
     1.000f, 0.500f, 1.000f, 0.500f, 10.400f, 7.400f);
 
 Field_Dimensions Field_Dimensions::Current_Dimensions =
-    Field_Dimensions::Double_Field_Dimensions;
+    Field_Dimensions::Single_Field_Dimensions;

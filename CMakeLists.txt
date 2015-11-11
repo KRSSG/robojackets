@@ -94,11 +94,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES robojackets
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
+catkin_package(                    
+ INCLUDE_DIRS include /usr/include/eigen3
+ LIBRARIES robojackets
+ CATKIN_DEPENDS roscpp rospy std_msgs
+ DEPENDS system_lib Boost Eigen3 QT5Widgets
 )
 
 ###########

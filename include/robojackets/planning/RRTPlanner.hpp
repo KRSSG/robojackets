@@ -1,13 +1,13 @@
 #pragma once
 
-#include "planning/SingleRobotPathPlanner.hpp"
-#include "planning/Tree.hpp"
-#include <Geometry2d/ShapeSet.hpp>
-#include <Geometry2d/Point.hpp>
-#include <planning/InterpolatedPath.hpp>
-#include <planning/MotionCommand.hpp>
-#include <planning/MotionConstraints.hpp>
-#include <planning/MotionInstant.hpp>
+#include "robojackets/planning/SingleRobotPathPlanner.hpp"
+#include "robojackets/planning/Tree.hpp"
+#include <robojackets/Geometry2d/ShapeSet.hpp>
+#include <robojackets/Geometry2d/Point.hpp>
+#include <robojackets/planning/InterpolatedPath.hpp>
+#include <robojackets/planning/MotionCommand.hpp>
+#include <robojackets/planning/MotionConstraints.hpp>
+#include <robojackets/planning/MotionInstant.hpp>
 
 #include <boost/optional.hpp>
 #include <Eigen/Dense>

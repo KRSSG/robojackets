@@ -1,7 +1,7 @@
-#include "Geometry2d/Rect.hpp"
-#include "Geometry2d/Point.hpp"
-#include "Geometry2d/Segment.hpp"
-#include <Constants.hpp>
+#include "robojackets/Geometry2d/Rect.hpp"
+#include "robojackets/Geometry2d/Point.hpp"
+#include "robojackets/Geometry2d/Segment.hpp"
+#include <robojackets/Constants.hpp>
 
 using namespace std;
 

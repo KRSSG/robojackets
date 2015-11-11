@@ -1,4 +1,4 @@
-#include "Configuration.hpp"
+#include "robojackets/Configuration.hpp"
 
 #include <QTreeWidget>
 #include <QTreeWidgetItem>

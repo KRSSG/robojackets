@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Geometry2d/Point.hpp"
+#include "robojackets/Geometry2d/Point.hpp"
 
 namespace Geometry2d {
 // A 2x3 transformation matrix.

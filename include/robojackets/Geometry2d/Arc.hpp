@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "Geometry2d/Point.hpp"
-#include "Geometry2d/Line.hpp"
-#include "Geometry2d/Segment.hpp"
+#include "robojackets/Geometry2d/Point.hpp"
+#include "robojackets/Geometry2d/Line.hpp"
+#include "robojackets/Geometry2d/Segment.hpp"
 
 namespace Geometry2d {
 class Arc {

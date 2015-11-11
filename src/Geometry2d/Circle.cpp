@@ -1,6 +1,6 @@
-#include "Geometry2d/Circle.hpp"
-#include "Geometry2d/Segment.hpp"
-#include <Constants.hpp>
+#include "robojackets/Geometry2d/Circle.hpp"
+#include "robojackets/Geometry2d/Segment.hpp"
+#include <robojackets/Constants.hpp>
 
 namespace Geometry2d {
 
