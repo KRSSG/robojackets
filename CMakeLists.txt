@@ -18,7 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system)
-find_package(Eigen3 REQUIRED COMPONENTS system)
+# find_package(Eigen3 REQUIRED COMPONENTS system)
 # find_package(SDL REQUIRED COMPONENTS system)
 find_package(Qt5Widgets REQUIRED COMPONENTS system)
 
@@ -209,6 +209,7 @@ set(src
   src/TrapezoidalMotion.cpp
   src/Utils.cpp
   src/MotionControl.cpp
+  src/RobotConfig.cpp
   )
 
 include_directories(.
@@ -245,5 +246,11 @@ install(TARGETS robojackets
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
+# for config
+# install(DIRECTORY config/
+#         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 add_executable(tester src/test.cpp)
 target_link_libraries(tester robojackets)
+
+file(COPY "config/" DESTINATION ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION})
+# message("bin desitination: " ${CATKIN_PACKAGE_BIN_DESTINATION})

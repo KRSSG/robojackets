@@ -9,6 +9,7 @@
 #include <robojackets/planning/MotionCommand.hpp>
 #include <robojackets/planning/MotionConstraints.hpp>
 #include <robojackets/planning/RotationConstraints.hpp>
+#include <robojackets/RobotConfig.hpp>
 class OurRobot;
 
 /**
@@ -34,19 +35,23 @@ public:
     // void stopped();
 
     /**
-     * This runs PID control on the position and angle of the robot and
-     * sets values in the robot's radioTx packet.
+     * This runs PID control on the position and angle of the robot 
      */
     MotionWrapper run(Planning::Path* path,
-                       Planning::RotationCommand* rotationCommand,
-                       Planning::MotionCommand *motionCommand,
-                       Geometry2d::Point pos,
-                       float angle,
-                       const MotionConstraints &motionConstraints,
-                       const RotationConstraints &rotationConstraints);
+                      Planning::RotationCommand* rotationCommand,
+                      Planning::MotionCommand *motionCommand,
+                      Geometry2d::Point pos,
+                      float angle,
+                      const MotionConstraints &motionConstraints,
+                      const RotationConstraints &rotationConstraints);
 
     static void createConfiguration(Configuration* cfg);
-
+    static Geometry2d::Point motionError(Planning::Path* path,
+                             Planning::MotionCommand *motionCommand,
+                             Geometry2d::Point pos);
+    static float angleError(Planning::RotationCommand* rotationCommand,
+                            Geometry2d::Point pos,
+                            float angle);
 private:
     // sets the target velocity in the robot's radio packet
     // this method is used by both run() and stopped() and does the

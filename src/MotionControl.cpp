@@ -30,6 +30,7 @@ ConfigDouble* MotionControl::_max_acceleration;
 ConfigDouble* MotionControl::_max_velocity;
 
 void MotionControl::createConfiguration(Configuration* cfg) {
+    printf("Mtion control config created!\n");
     _max_acceleration =
         new ConfigDouble(cfg, "MotionControl/Max Acceleration", 1.5);
     _max_velocity = new ConfigDouble(cfg, "MotionControl/Max Velocity", 2.0);
@@ -42,6 +43,63 @@ MotionControl::MotionControl() : _angleController(0, 0, 0, 50) {
 
     // _robot->radioTx.set_robot_id(_robot->shell());
     _lastCmdTime = -1;
+}
+
+Point MotionControl::motionError(Planning::Path* path,
+                             Planning::MotionCommand *motionCommand,
+                             Geometry2d::Point pos) {
+    if (!path)
+        return Point(0,0);
+    MotionInstant target;
+
+   // convert from microseconds to seconds
+    float timeIntoPath =
+        ((float)(RJ::timestamp() - path->startTime())) *
+            TimestampToSecs +
+        1.0 / 60.0;
+
+    // evaluate path - where should we be right now?
+    boost::optional<MotionInstant> optTarget =
+        path->evaluate(timeIntoPath);
+    if (!optTarget) {
+        // use the path end if our timeIntoPath is greater than the duration
+        target.vel = Point();
+        target.pos = path->end().pos;
+    } else {
+        target = *optTarget;
+    }
+    // tracking error
+    Point posError = target.pos - pos;
+    return posError;
+}
+float MotionControl::angleError(Planning::RotationCommand* rotationCommand,
+                         Geometry2d::Point pos,
+                         float angle) {
+    boost::optional<Geometry2d::Point> targetPt;
+    switch (rotationCommand->getCommandType()) {
+        case RotationCommand::FacePoint:
+            targetPt = static_cast<const Planning::FacePointCommand*>(
+                           rotationCommand)
+                           ->targetPos;
+                           //printf("got target pt from FacePoint = %f, %f!\n", targetPt->x, targetPt->y);
+            break;
+        case RotationCommand::None:
+            // do nothing
+            break;
+        default:
+            debugThrow("RotationCommand Not implemented");
+            break;
+    }
+
+    if (targetPt) {
+        // fixing the angle ensures that we don't go the long way around to get
+        // to our final angle
+        float targetAngleFinal = (*targetPt - pos).angle();
+        float angleError = fixAngleRadians(targetAngleFinal - angle);
+        return angleError;
+    }
+    return 0;
+
 }
 
 MotionWrapper MotionControl::run(  Planning::Path* path,
@@ -192,9 +250,10 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
 
         // convert from world to body coordinates
         target.vel = target.vel.rotated(-angle);
-    }
-
+    }    
+    
     wrapper.vel = this->_targetBodyVel(target.vel);
+
     return wrapper;
 }
 

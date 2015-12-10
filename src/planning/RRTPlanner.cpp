@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <Eigen/Dense>
 
+#include <ros/console.h>
+
 using namespace std;
 using namespace Eigen;
 
@@ -79,6 +81,7 @@ std::unique_ptr<Path> RRTPlanner::run(
         // If RRT failed, the path will be empty, so we need to add a single
         // point to make it valid.
         if (path && path->waypoints.empty()) {
+            ROS_WARN("new path has no waypoints!!");
             path->waypoints.emplace_back(
                 MotionInstant(start.pos, Geometry2d::Point()), 0);
         }
@@ -136,9 +139,9 @@ InterpolatedPath* RRTPlanner::runRRT(MotionInstant start, MotionInstant goal,
     startTree.addPath(*path, p0);
     // add the goal tree in reverse (aka p1 to root)
     goalTree.addPath(*path, p1, true);
-
+    ROS_INFO_NAMED("path", "non optimized path size = %lu", path->size());
     path = optimize(*path, obstacles, motionConstraints, start.vel, goal.vel);
-
+    // ROS_INFO_NAMED("path", "optimized path size = %lu", path->size());
     return path;
 }
 

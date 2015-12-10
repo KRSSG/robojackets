@@ -17,7 +17,11 @@ int main(int argc, char const *argv[])
 {
   using namespace Planning;
   std::shared_ptr<Configuration> config =
-        Configuration::FromRegisteredConfigurables();
+        Configuration::FromRegisteredConfigurables();\
+  QString error;
+  if (!config->load("sim.xml", error) ) {
+    printf("could not load config : %s.\n", error.toStdString().c_str());
+  }
   MotionInstant mi({1,1},{0,0});
   std::unique_ptr<MotionCommand> mc(new PathTargetCommand(mi));
   std::unique_ptr<SingleRobotPathPlanner> planner = PlannerForCommandType(mc->getCommandType());
