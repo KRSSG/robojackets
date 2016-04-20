@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <Geometry2d/Point.hpp>
 #include <planning/SingleRobotPathPlanner.hpp>
+#include <iostream>
 using namespace std;
 using namespace Geometry2d;
 using namespace Planning;
@@ -114,11 +115,11 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
     const MotionConstraints& constraints = motionConstraints;
 
     // update PID parameters
-    _positionXController.kp = 1.0;
+    _positionXController.kp = 5.0;
     _positionXController.ki = 0;
     _positionXController.setWindup(0);
     _positionXController.kd = 0;
-    _positionYController.kp = 1;
+    _positionYController.kp = 5;
     _positionYController.ki = 0;
     _positionYController.setWindup(0);
     _positionYController.kd = 0;
@@ -197,6 +198,8 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
     ////////////////////////////////////////////////////////////////////
 
     MotionInstant target;
+    // debugging variablese
+    Geometry2d::Point refVel, pidVel, clampedVel;
     // if no target position is given, we don't have a path to follow
     if (!path) {
         wrapper.vel = _targetBodyVel(Point(0, 0));
@@ -238,10 +241,12 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
             acceleration * 60.0f * (ACCEL_MULTIPLIER);
 
         target.vel += accelFactor;
-
+        refVel = target.vel;
         // PID on position
-        target.vel.x += _positionXController.run(posError.x);
-        target.vel.y += _positionYController.run(posError.y);
+        pidVel.x = _positionXController.run(posError.x);
+        pidVel.y = _positionYController.run(posError.y);
+        target.vel.x += pidVel.x;
+        target.vel.y += pidVel.y;
 
         // draw target pt
         // _robot->state()->drawCircle(target.pos, .04, Qt::red, "MotionControl");
@@ -253,7 +258,8 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
     }    
     
     wrapper.vel = this->_targetBodyVel(target.vel);
-
+    clampedVel = wrapper.vel;
+    // std::cout << "ref vel = " << refVel << " pid vel = " << pidVel << " clamped vel = " << clampedVel ;
     return wrapper;
 }
 
