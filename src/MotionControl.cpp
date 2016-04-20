@@ -256,10 +256,11 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
         // convert from world to body coordinates
         target.vel = target.vel.rotated(-angle);
     }    
-    
-    wrapper.vel = this->_targetBodyVel(target.vel);
+    // DEBUG: try removing the clapmping part and just set wrapper.vel to target.vel?
+    // wrapper.vel = this->_targetBodyVel(target.vel);
+    wrapper.vel = target.vel;
     clampedVel = wrapper.vel;
-    // std::cout << "ref vel = " << refVel << " pid vel = " << pidVel << " clamped vel = " << clampedVel ;
+    std::cout << "ref vel = " << refVel << " pid vel = " << pidVel << " clamped vel = " << clampedVel ;
     return wrapper;
 }
 
