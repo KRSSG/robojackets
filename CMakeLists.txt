@@ -197,6 +197,8 @@ set(planningSrc
   src/planning/Util.cpp
   src/planning/RotationConstraints.cpp
   src/planning/MotionConstraints.cpp
+  src/planning/dijkstra.cpp
+  src/planning/visibility.cpp
   )
 
 set(src
