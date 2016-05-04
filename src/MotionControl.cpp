@@ -260,7 +260,7 @@ MotionWrapper MotionControl::run(  Planning::Path* path,
     // wrapper.vel = this->_targetBodyVel(target.vel);
     wrapper.vel = target.vel;
     clampedVel = wrapper.vel;
-    std::cout << "ref vel = " << refVel << " pid vel = " << pidVel << " clamped vel = " << clampedVel ;
+    // std::cout << "ref vel = " << refVel << " pid vel = " << pidVel << " clamped vel = " << clampedVel ;
     return wrapper;
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "robojackets/planning/SingleRobotPathPlanner.hpp"
+#include "robojackets/planning/SingleRobotBezierPathPlanner.hpp"
 #include "robojackets/planning/Tree.hpp"
 #include <robojackets/Geometry2d/ShapeSet.hpp>
 #include <robojackets/Geometry2d/Point.hpp>
@@ -24,7 +24,7 @@ namespace Planning {
  * You can check out our interactive RRT applet on GitHub here:
  * https://github.com/RoboJackets/rrt.
  */
-class RRTPlanner : public SingleRobotPathPlanner {
+class RRTPlanner : public SingleRobotBezierPathPlanner {
 public:
     RRTPlanner(int maxIterations);
     /**
@@ -65,33 +65,7 @@ protected:
         MotionInstant start, MotionInstant goal,
         const MotionConstraints& motionConstraints,
         const Geometry2d::ShapeSet* obstacles);
-
-    /** optimize the path
-     *  Calls the cubicBezier optimization function.
-     */
-    Planning::InterpolatedPath* optimize(
-        Planning::InterpolatedPath& path, const Geometry2d::ShapeSet* obstacles,
-        const MotionConstraints& motionConstraints, Geometry2d::Point vi,
-        Geometry2d::Point vf);
-
-    /**
-     * Uses a cubicBezier to interpolate between the points on the path and add
-     * velocity planning
-     */
-    Planning::InterpolatedPath* cubicBezier(
-        Planning::InterpolatedPath& path, const Geometry2d::ShapeSet* obstacles,
-        const MotionConstraints& motionConstraints, Geometry2d::Point vi,
-        Geometry2d::Point vf);
-
-    /**
-     * Helper function for cubicBezier() which uses Eigen matrices to solve for
-     * the
-     * cubic bezier equations.
-     */
-    Eigen::VectorXd cubicBezierCalc(double vi, double vf,
-                                    std::vector<double>& points,
-                                    std::vector<double>& ks,
-                                    std::vector<double>& ks2);
+    
 };
 
 }  // namespace Planning

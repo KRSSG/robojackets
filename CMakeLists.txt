@@ -193,12 +193,14 @@ set(planningSrc
   src/planning/Path.cpp
   src/planning/RRTPlanner.cpp
   src/planning/SingleRobotPathPlanner.cpp
+  src/planning/SingleRobotBezierPathPlanner.cpp
   src/planning/Tree.cpp
   src/planning/Util.cpp
   src/planning/RotationConstraints.cpp
   src/planning/MotionConstraints.cpp
   src/planning/dijkstra.cpp
   src/planning/visibility.cpp
+  src/planning/recursivePlanner.cpp
   )
 
 set(src

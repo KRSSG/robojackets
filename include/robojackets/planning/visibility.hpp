@@ -5,7 +5,7 @@
 #include "robojackets/planning/InterpolatedPath.hpp"
 
 
-#include "robojackets/planning/SingleRobotPathPlanner.hpp"
+#include "robojackets/planning/SingleRobotBezierPathPlanner.hpp"
 #include "robojackets/planning/Tree.hpp"
 #include <robojackets/Geometry2d/ShapeSet.hpp>
 #include <robojackets/Geometry2d/Point.hpp>
@@ -26,7 +26,7 @@ using namespace Geometry2d;
 // should not take too much time to build!
 namespace Planning {
 
-class VisibilityGraph : public SingleRobotPathPlanner { 
+class VisibilityGraph : public SingleRobotBezierPathPlanner { 
 protected:
   vector<Segment> segments; // all the line segments
   vector<Point> vertices; // all the vertices in the graph
@@ -57,38 +57,6 @@ public:
         std::unique_ptr<Path> prevPath = nullptr) override;
 
 
-  // helper functions
-  /// Runs a bi-directional RRT to attempt to join the start and end states.
-    Planning::InterpolatedPath* runRRT(
-      MotionInstant start, MotionInstant goal,
-      const MotionConstraints& motionConstraints,
-      const Geometry2d::ShapeSet* obstacles);
 
-  /** optimize the path
-   *  Calls the cubicBezier optimization function.
-   */
-  Planning::InterpolatedPath* optimize(
-      Planning::InterpolatedPath& path, const Geometry2d::ShapeSet* obstacles,
-      const MotionConstraints& motionConstraints, Geometry2d::Point vi,
-      Geometry2d::Point vf);
-
-  /**
-   * Uses a cubicBezier to interpolate between the points on the path and add
-   * velocity planning
-   */
-  Planning::InterpolatedPath* cubicBezier(
-      Planning::InterpolatedPath& path, const Geometry2d::ShapeSet* obstacles,
-      const MotionConstraints& motionConstraints, Geometry2d::Point vi,
-      Geometry2d::Point vf);
-
-  /**
-   * Helper function for cubicBezier() which uses Eigen matrices to solve for
-   * the
-   * cubic bezier equations.
-   */
-  Eigen::VectorXd cubicBezierCalc(double vi, double vf,
-                                  std::vector<double>& points,
-                                  std::vector<double>& ks,
-                                  std::vector<double>& ks2);
 };
 }

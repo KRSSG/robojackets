@@ -5,6 +5,7 @@
 // #include "EscapeObstaclesPathPlanner.hpp"
 #include "planning/RRTPlanner.hpp"
 #include "planning/visibility.hpp"
+#include "planning/recursivePlanner.hpp"
 namespace Planning {
 
 REGISTER_CONFIGURABLE(SingleRobotPathPlanner);
@@ -24,8 +25,9 @@ std::unique_ptr<SingleRobotPathPlanner> PlannerForCommandType(
     switch (type) {
         case MotionCommand::PathTarget:
             // planner = new RRTPlanner(250);
-            planner = new VisibilityGraph();
-            // DEBUG: using VG planner!
+            // planner = new VisibilityGraph();
+            planner = new RecursivePlanner(10);
+            // DEBUG: using new planners!
             break;
         // case MotionCommand::DirectPathTarget:
         //     planner = new DirectTargetPathPlanner();
